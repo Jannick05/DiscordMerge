@@ -1,6 +1,7 @@
 package dk.nydt.discordmerge.objects;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.misc.BaseDaoEnabled;
 import com.j256.ormlite.table.DatabaseTable;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import lombok.Setter;
 import java.util.UUID;
 
 @DatabaseTable(tableName = "minecraft_accounts")
-public class MinecraftAccount {
+public class MinecraftAccount extends BaseDaoEnabled<MinecraftAccount, Integer> {
     @Setter @Getter
     @DatabaseField(generatedId = true, columnName = "id")
     private int id;

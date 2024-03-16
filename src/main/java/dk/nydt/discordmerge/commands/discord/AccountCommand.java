@@ -33,7 +33,7 @@ public class AccountCommand extends ListenerAdapter {
                     return;
                 }
                 for (MinecraftAccount minecraftAccount : minecraftAccounts) {
-                    embedBuilder.addField(minecraftAccount.getName(), minecraftAccount.getUuid().toString(), false);
+                    embedBuilder.addField(minecraftAccount.getName(), minecraftAccount.getUuid().toString(), true);
                 }
 
                 event.replyEmbeds(embedBuilder.build()).setEphemeral(true).queue();

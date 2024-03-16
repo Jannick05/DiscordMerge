@@ -63,7 +63,7 @@ public final class DiscordMerge extends JavaPlugin {
     }
 
     private static JDA start() {
-        return JDABuilder.createLight("OTI1NTY1NTA5MzAxMzIxODE4.G_TQqd.g7Ho7P-HaeFDMrV37bTSxqgFoMTO3TylvrM8wk")
+        JDA jda = JDABuilder.createLight("OTI1NTY1NTA5MzAxMzIxODE4.G_TQqd.g7Ho7P-HaeFDMrV37bTSxqgFoMTO3TylvrM8wk")
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .setMemberCachePolicy(MemberCachePolicy.ONLINE)
                 .disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE)
@@ -71,10 +71,17 @@ public final class DiscordMerge extends JavaPlugin {
                 .enableCache(CacheFlag.ACTIVITY)
                 .setAutoReconnect(true)
                 .addEventListeners(
-                        new CodeCommand(),
+                        new CodeCommand())
+                .addEventListeners(
                         new AccountCommand()
                 )
                 .build();
+        try {
+            jda.awaitReady();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return jda;
     }
 
     private static void registerDiscordCommands() {

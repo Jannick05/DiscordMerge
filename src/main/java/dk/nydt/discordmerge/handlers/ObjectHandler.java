@@ -30,13 +30,10 @@ public class ObjectHandler {
     }
 
     public MinecraftAccount getOrCreateMinecraftAccount(UUID uuid, String name, LinkedUser linkedUser) throws SQLException {
-        MinecraftAccount minecraftAccount;
         try {
             return SQLiteHandler.getMinecraftAccountDao().queryForEq("uuid", uuid).get(0);
         } catch (Exception e) {
-            minecraftAccount = new MinecraftAccount(uuid, name, linkedUser);
-            SQLiteHandler.getMinecraftAccountDao().create(minecraftAccount);
-            return SQLiteHandler.getMinecraftAccountDao().queryForEq("uuid", uuid).get(0);
+            return new MinecraftAccount(uuid, name, linkedUser);
         }
     }
 

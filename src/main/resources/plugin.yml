@@ -5,3 +5,5 @@ main: dk.nydt.discordmerge.DiscordMerge
 commands:
   link:
     description: Link your Minecraft account with your Discord account
+  unlink:
+    description: Unlink your Minecraft account from your Discord account
