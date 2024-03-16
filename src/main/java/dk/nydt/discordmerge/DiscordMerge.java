@@ -1,8 +1,10 @@
 package dk.nydt.discordmerge;
 
 import co.aikar.commands.PaperCommandManager;
+import dk.nydt.discordmerge.commands.discord.AccountCommand;
 import dk.nydt.discordmerge.commands.discord.CodeCommand;
 import dk.nydt.discordmerge.commands.minecraft.LinkCommand;
+import dk.nydt.discordmerge.commands.minecraft.UnlinkCommand;
 import dk.nydt.discordmerge.handlers.CodeHandler;
 import dk.nydt.discordmerge.handlers.ObjectHandler;
 import dk.nydt.discordmerge.handlers.SQLiteHandler;
@@ -10,6 +12,7 @@ import lombok.Getter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -42,6 +45,7 @@ public final class DiscordMerge extends JavaPlugin {
 
         commandManager = new PaperCommandManager(this);
         commandManager.registerCommand(new LinkCommand());
+        commandManager.registerCommand(new UnlinkCommand());
 
         jda = start();
         registerDiscordCommands();
@@ -67,7 +71,8 @@ public final class DiscordMerge extends JavaPlugin {
                 .enableCache(CacheFlag.ACTIVITY)
                 .setAutoReconnect(true)
                 .addEventListeners(
-                    new CodeCommand()
+                        new CodeCommand(),
+                        new AccountCommand()
                 )
                 .build();
     }
@@ -76,7 +81,9 @@ public final class DiscordMerge extends JavaPlugin {
         Guild guild = jda.getGuildById("958069975443177542");
         if(guild == null) return;
         guild.updateCommands().addCommands(
-                Commands.slash("code", "Generates a code for linking your account")
-        ).queue();
+                Commands.slash("code", "Generates a code for linking your account"),
+                Commands.slash("account", "Shows linked accounts")
+                        .addOption(OptionType.USER, "player", "The player to show linked accounts of", false)
+                ).queue();
     }
 }

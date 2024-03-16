@@ -1,5 +1,6 @@
 package dk.nydt.discordmerge.handlers;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import dk.nydt.discordmerge.objects.LinkedUser;
 import dk.nydt.discordmerge.objects.MinecraftAccount;
 
@@ -37,5 +38,9 @@ public class ObjectHandler {
             SQLiteHandler.getMinecraftAccountDao().create(minecraftAccount);
             return SQLiteHandler.getMinecraftAccountDao().queryForEq("uuid", uuid).get(0);
         }
+    }
+
+    public ForeignCollection<MinecraftAccount> getMinecraftAccounts(String discordId) throws SQLException {
+        return getOrCreateLinkedUser(discordId).getMinecraftAccounts();
     }
 }

@@ -16,6 +16,7 @@ public class MinecraftAccount {
     @DatabaseField(columnName = "uuid")
     private UUID uuid;
     @Setter @Getter
+    @DatabaseField(columnName = "name")
     private String name;
     @Setter @Getter
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "linkedUser")

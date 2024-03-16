@@ -35,8 +35,6 @@ public class LinkCommand extends BaseCommand {
                 objectHandler.createMerge(codeHandler.getCodes().get(code), player.getName(), player.getUniqueId());
                 codeHandler.getCodes().remove(code);
                 player.sendMessage("You have successfully linked your account!");
-            } else {
-                player.sendMessage("Invalid code!");
             }
         } catch (Exception e) {
             player.sendMessage("Invalid code!");
