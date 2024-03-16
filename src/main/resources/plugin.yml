@@ -1,0 +1,7 @@
+name: DiscordMerge
+database: true
+version: '${project.version}'
+main: dk.nydt.discordmerge.DiscordMerge
+commands:
+  link:
+    description: Link your Minecraft account with your Discord account
