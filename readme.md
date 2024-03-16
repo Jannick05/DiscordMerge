@@ -25,7 +25,7 @@ DiscordMerge is a Minecraft plugin designed to enhance your gaming experience by
 For support, bug reports, or feature requests, please open an issue on this repository. We welcome any feedback or suggestions for improving DiscordMerge.
 
 ## Contributing
-We appreciate contributions from the community! If you're interested in contributing to DiscordMerge, please follow the guidelines outlined in the `CONTRIBUTING.md` file in this repository.
+We appreciate contributions from the community! If you're interested in contributing to DiscordMerge, please follow contact me on discord: `jannick_05`.
 
 ---
 
