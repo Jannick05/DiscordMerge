@@ -1,16 +1,17 @@
 package dk.nydt.discordmerge.addons;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.SkriptAddon;
 import dk.nydt.discordmerge.DiscordMerge;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 
-public class SkriptAddon {
+public class SkriptDependency {
     @Getter
     private static Skript skript;
     @Getter
-    private static ch.njol.skript.SkriptAddon addon;
-    public SkriptAddon() {
+    private static SkriptAddon addon;
+    public static void initialize() {
         if(!Bukkit.getServer().getPluginManager().isPluginEnabled("Skript")) {
             return;
         }

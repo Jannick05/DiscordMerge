@@ -6,7 +6,7 @@ import java.util.*;
 
 public class CodeHandler {
     @Getter
-    public Map<String, String> linkCodes = new HashMap<>();
+    private Map<String, String> linkCodes = new HashMap<>();
 
     public String generateCode() {
         String CODE_POOL = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -20,7 +20,7 @@ public class CodeHandler {
 
     public String createLinkCode(String discordId) {
         String code = generateCode();
-        linkCodes.put(discordId, code);
+        linkCodes.put(code, discordId);
         return code;
     }
 }

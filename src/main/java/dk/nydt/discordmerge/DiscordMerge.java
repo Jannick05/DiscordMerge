@@ -1,7 +1,7 @@
 package dk.nydt.discordmerge;
 
 import co.aikar.commands.PaperCommandManager;
-import dk.nydt.discordmerge.addons.SkriptAddon;
+import dk.nydt.discordmerge.addons.SkriptDependency;
 import dk.nydt.discordmerge.commands.configs.Config;
 import dk.nydt.discordmerge.commands.discord.AccountCommand;
 import dk.nydt.discordmerge.commands.discord.CodeCommand;
@@ -48,7 +48,7 @@ public final class DiscordMerge extends JavaPlugin {
     private static ConfigHandler configHandler;
 
     @Getter
-    private static SkriptAddon skriptAddon;
+    private static SkriptDependency skriptDependency;
 
     @Getter
     private static Config configuration;
@@ -57,11 +57,10 @@ public final class DiscordMerge extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        skriptAddon = new SkriptAddon();
-
         codeHandler = new CodeHandler();
         objectHandler = new ObjectHandler();
         sqliteHandler = new SQLiteHandler();
+        configHandler = new ConfigHandler();
 
         configuration = ConfigManager.create(Config.class, (it) -> {
             it.withConfigurer(new YamlBukkitConfigurer());
@@ -79,6 +78,8 @@ public final class DiscordMerge extends JavaPlugin {
 
         jda = start();
         registerDiscordCommands();
+
+        skriptDependency = new SkriptDependency();
 
     }
 
