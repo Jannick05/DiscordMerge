@@ -17,8 +17,8 @@ import java.util.List;
 
 @CommandAlias("link")
 public class LinkCommand extends BaseCommand {
-    CodeHandler codeHandler = DiscordMerge.getCodeHandler();
-    ObjectHandler objectHandler = DiscordMerge.getObjectHandler();
+    private final CodeHandler codeHandler = DiscordMerge.getCodeHandler();
+    private final ObjectHandler objectHandler = DiscordMerge.getObjectHandler();
     @Default
     @Syntax("<code>")
     public void onDefault(CommandSender sender, String code) {

@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class CodeCommand extends ListenerAdapter {
-    CodeHandler codeHandler = DiscordMerge.getCodeHandler();
+    private final CodeHandler codeHandler = DiscordMerge.getCodeHandler();
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         if(event.getMember() == null) return;

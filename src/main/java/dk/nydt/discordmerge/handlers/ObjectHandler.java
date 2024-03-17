@@ -1,10 +1,18 @@
 package dk.nydt.discordmerge.handlers;
 
 import com.j256.ormlite.dao.ForeignCollection;
+import dk.nydt.discordmerge.DiscordMerge;
 import dk.nydt.discordmerge.objects.LinkedUser;
 import dk.nydt.discordmerge.objects.MinecraftAccount;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.requests.restaction.CacheRestAction;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class ObjectHandler {
@@ -40,4 +48,5 @@ public class ObjectHandler {
     public ForeignCollection<MinecraftAccount> getMinecraftAccounts(String discordId) throws SQLException {
         return getOrCreateLinkedUser(discordId).getMinecraftAccounts();
     }
+
 }

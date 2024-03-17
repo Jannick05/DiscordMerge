@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import java.sql.SQLException;
 
 public class AccountCommand extends ListenerAdapter {
-    ObjectHandler objectHandler = DiscordMerge.getObjectHandler();
+    private final ObjectHandler objectHandler = DiscordMerge.getObjectHandler();
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         if(event.getMember() == null) return;
