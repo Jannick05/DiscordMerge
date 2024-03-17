@@ -11,7 +11,7 @@ public class CodeCommand extends ListenerAdapter {
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         if(event.getMember() == null) return;
         if (event.getName().equals("code")) {
-            event.reply("Here's your code: " + codeHandler.generateCode(event.getMember().getId())).setEphemeral(true).queue();
+            event.reply("Here's your code: " + codeHandler.createLinkCode(event.getMember().getId())).setEphemeral(true).queue();
         }
     }
 }

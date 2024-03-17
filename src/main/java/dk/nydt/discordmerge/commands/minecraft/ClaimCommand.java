@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import dk.nydt.discordmerge.DiscordMerge;
 import dk.nydt.discordmerge.commands.configs.Config;
+import dk.nydt.discordmerge.events.minecraft.DiscordClaimRoles;
 import dk.nydt.discordmerge.handlers.SQLiteHandler;
 import dk.nydt.discordmerge.objects.LinkedUser;
 import dk.nydt.discordmerge.objects.MinecraftAccount;
@@ -13,6 +14,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.requests.restaction.CacheRestAction;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -58,6 +60,8 @@ public class ClaimCommand extends BaseCommand {
                             }
                             guild.addRoleToMember(member, role).queue();
                             player.sendMessage("You have successfully claimed the role!");
+                            DiscordClaimRoles discordClaimRoles = new DiscordClaimRoles(player);
+                            Bukkit.getServer().getPluginManager().callEvent(discordClaimRoles);
                         } else {
                             player.sendMessage("No available roles to claim!");
                         }

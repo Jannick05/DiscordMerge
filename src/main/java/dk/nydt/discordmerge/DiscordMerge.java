@@ -1,12 +1,15 @@
 package dk.nydt.discordmerge;
 
 import co.aikar.commands.PaperCommandManager;
+import dk.nydt.discordmerge.addons.SkriptAddon;
 import dk.nydt.discordmerge.commands.configs.Config;
 import dk.nydt.discordmerge.commands.discord.AccountCommand;
 import dk.nydt.discordmerge.commands.discord.CodeCommand;
+import dk.nydt.discordmerge.commands.minecraft.BoostCommand;
 import dk.nydt.discordmerge.commands.minecraft.ClaimCommand;
 import dk.nydt.discordmerge.commands.minecraft.LinkCommand;
 import dk.nydt.discordmerge.commands.minecraft.UnlinkCommand;
+import dk.nydt.discordmerge.events.discord.MemberUpdateBoost;
 import dk.nydt.discordmerge.handlers.CodeHandler;
 import dk.nydt.discordmerge.handlers.ConfigHandler;
 import dk.nydt.discordmerge.handlers.ObjectHandler;
@@ -28,28 +31,33 @@ import java.io.File;
 
 public final class DiscordMerge extends JavaPlugin {
     @Getter
-    public static DiscordMerge instance;
+    private static DiscordMerge instance;
     @Getter
-    public static JDA jda;
+    private static JDA jda;
 
     @Getter
-    public static PaperCommandManager commandManager;
+    private static PaperCommandManager commandManager;
 
     @Getter
-    public static CodeHandler codeHandler;
+    private static CodeHandler codeHandler;
     @Getter
-    public static ObjectHandler objectHandler;
+    private static ObjectHandler objectHandler;
     @Getter
-    public static SQLiteHandler sqliteHandler;
+    private static SQLiteHandler sqliteHandler;
     @Getter
-    public static ConfigHandler configHandler;
+    private static ConfigHandler configHandler;
 
     @Getter
-    public static Config configuration;
+    private static SkriptAddon skriptAddon;
+
+    @Getter
+    private static Config configuration;
 
     @Override
     public void onEnable() {
         instance = this;
+
+        skriptAddon = new SkriptAddon();
 
         codeHandler = new CodeHandler();
         objectHandler = new ObjectHandler();
@@ -67,6 +75,7 @@ public final class DiscordMerge extends JavaPlugin {
         commandManager.registerCommand(new LinkCommand());
         commandManager.registerCommand(new UnlinkCommand());
         commandManager.registerCommand(new ClaimCommand());
+        commandManager.registerCommand(new BoostCommand());
 
         jda = start();
         registerDiscordCommands();
@@ -92,9 +101,9 @@ public final class DiscordMerge extends JavaPlugin {
                 .enableCache(CacheFlag.ACTIVITY)
                 .setAutoReconnect(true)
                 .addEventListeners(
-                        new CodeCommand())
-                .addEventListeners(
-                        new AccountCommand())
+                        new CodeCommand(),
+                        new AccountCommand(),
+                        new MemberUpdateBoost())
                 .build();
         try {
             jda.awaitReady();
