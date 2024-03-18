@@ -1,7 +1,7 @@
 package dk.nydt.discordmerge.events.minecraft;
 
 import lombok.Getter;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -9,10 +9,10 @@ import org.bukkit.event.HandlerList;
 public class DiscordUnlink extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     @Getter
-    private final OfflinePlayer player;
+    private final Player player;
     private Boolean cancelled = Boolean.FALSE;
 
-    public DiscordUnlink(OfflinePlayer player) {
+    public DiscordUnlink(Player player) {
         this.player = player;
     }
 

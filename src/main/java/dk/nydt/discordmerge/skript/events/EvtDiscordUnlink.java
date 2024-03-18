@@ -7,7 +7,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import dk.nydt.discordmerge.events.minecraft.DiscordUnlink;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,8 +16,8 @@ public class EvtDiscordUnlink extends SkriptEvent {
     static {
         Skript.registerEvent("discord unlink", EvtDiscordUnlink.class, DiscordUnlink.class, "[DiscordMerge ][on ]discord unlink");
 
-        EventValues.registerEventValue(DiscordUnlink.class, OfflinePlayer.class, new Getter<OfflinePlayer, DiscordUnlink>() {
-            public OfflinePlayer get(DiscordUnlink event) {
+        EventValues.registerEventValue(DiscordUnlink.class, Player.class, new Getter<Player, DiscordUnlink>() {
+            public Player get(DiscordUnlink event) {
                 return event.getPlayer();
             }
         }, 0);

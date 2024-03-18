@@ -8,6 +8,7 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import dk.nydt.discordmerge.events.minecraft.DiscordLink;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,8 +17,8 @@ public class EvtDiscordLink extends SkriptEvent {
     static {
         Skript.registerEvent("discord link", EvtDiscordLink.class, DiscordLink.class, "[DiscordMerge ][on ]discord link");
 
-        EventValues.registerEventValue(DiscordLink.class, OfflinePlayer.class, new Getter<OfflinePlayer, DiscordLink>() {
-            public OfflinePlayer get(DiscordLink event) {
+        EventValues.registerEventValue(DiscordLink.class, Player.class, new Getter<Player, DiscordLink>() {
+            public Player get(DiscordLink event) {
                 return event.getPlayer();
             }
         }, 0);

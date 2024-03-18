@@ -8,6 +8,7 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import dk.nydt.discordmerge.events.minecraft.DiscordClaimBoost;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,8 +17,8 @@ public class EvtDiscordClaimBoost extends SkriptEvent {
     static {
         Skript.registerEvent("discord claim boost", EvtDiscordClaimBoost.class, Event.class, "[DiscordMerge ][on ]discord claim boost");
 
-        EventValues.registerEventValue(DiscordClaimBoost.class, OfflinePlayer.class, new Getter<OfflinePlayer, DiscordClaimBoost>() {
-            public OfflinePlayer get(DiscordClaimBoost event) {
+        EventValues.registerEventValue(DiscordClaimBoost.class, Player.class, new Getter<Player, DiscordClaimBoost>() {
+            public Player get(DiscordClaimBoost event) {
                 return event.getPlayer();
             }
         }, 0);

@@ -8,6 +8,7 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import dk.nydt.discordmerge.events.minecraft.DiscordClaimRoles;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,8 +17,8 @@ public class EvtDiscordClaimRoles extends SkriptEvent {
     static {
         Skript.registerEvent("discord claim roles", EvtDiscordClaimRoles.class, DiscordClaimRoles.class, "[DiscordMerge ][on ]discord claim roles");
 
-        EventValues.registerEventValue(DiscordClaimRoles.class, OfflinePlayer.class, new Getter<OfflinePlayer, DiscordClaimRoles>() {
-            public OfflinePlayer get(DiscordClaimRoles event) {
+        EventValues.registerEventValue(DiscordClaimRoles.class, Player.class, new Getter<Player, DiscordClaimRoles>() {
+            public Player get(DiscordClaimRoles event) {
                 return event.getPlayer();
             }
         }, 0);
