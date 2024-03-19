@@ -26,12 +26,12 @@ public class Messages extends OkaeriConfig {
     public List<String> minecraftBoostCommandInvalidCode = Collections.singletonList("Invalid code!");
     public List<String> minecraftBoostCommandSuccess = Collections.singletonList("You have successfully claimed your boost reward!");
     @Comment(" ")
-    public List<String> minecraftClaimCommandNotLinked = Collections.singletonList("Invalid code!");
-    public List<String> minecraftClaimCommandNoGuild = Collections.singletonList("You have successfully claimed your reward!");
-    public List<String> minecraftClaimCommandNoMember = Collections.singletonList("You have successfully claimed your reward!");
-    public List<String> minecraftClaimCommandNoRole = Collections.singletonList("You have successfully claimed your reward!");
-    public List<String> minecraftClaimCommandAlreadyHasRole = Collections.singletonList("You have successfully claimed your reward!");
-    public List<String> minecraftClaimCommandNoAvailableRoles = Collections.singletonList("You have successfully claimed your reward!");
+    public List<String> minecraftClaimCommandNotLinked = Collections.singletonList("You are not linked to a Discord account!");
+    public List<String> minecraftClaimCommandNoGuild = Collections.singletonList("You are not in the correct guild!");
+    public List<String> minecraftClaimCommandNoMember = Collections.singletonList("You are not in the guild!");
+    public List<String> minecraftClaimCommandNoRole = Collections.singletonList("You do not have the required role to claim a reward!");
+    public List<String> minecraftClaimCommandAlreadyHasRole = Collections.singletonList("You already have the role!");
+    public List<String> minecraftClaimCommandNoAvailableRoles = Collections.singletonList("There are no available roles to claim!");
     public List<String> minecraftClaimCommandSuccess = Collections.singletonList("You have successfully claimed your reward!");
     @Comment(" ")
     public List<String> minecraftLinkCommandSuccess = Collections.singletonList("You have successfully linked your account!");
