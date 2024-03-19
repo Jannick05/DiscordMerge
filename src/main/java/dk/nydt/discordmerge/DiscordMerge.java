@@ -1,8 +1,6 @@
 package dk.nydt.discordmerge;
 
-import ch.njol.skript.Skript;
 import co.aikar.commands.PaperCommandManager;
-import dk.nydt.discordmerge.addons.SkriptDependency;
 import dk.nydt.discordmerge.commands.configs.Config;
 import dk.nydt.discordmerge.commands.discord.AccountCommand;
 import dk.nydt.discordmerge.commands.discord.CodeCommand;
@@ -29,7 +27,6 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 
 public final class DiscordMerge extends JavaPlugin {
     @Getter
@@ -48,9 +45,6 @@ public final class DiscordMerge extends JavaPlugin {
     private static SQLiteHandler sqliteHandler;
     @Getter
     private static ConfigHandler configHandler;
-
-    @Getter
-    private static SkriptDependency skriptDependency;
 
     @Getter
     private static Config configuration;
@@ -80,12 +74,6 @@ public final class DiscordMerge extends JavaPlugin {
 
         jda = start();
         registerDiscordCommands();
-
-        try {
-            Skript.registerAddon(this).loadClasses("dk.nydt.discordmerge", "skript");
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load the addon.", e);
-        }
 
     }
 
