@@ -5,7 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Syntax;
 import dk.nydt.discordmerge.DiscordMerge;
-import dk.nydt.discordmerge.commands.configs.Messages;
+import dk.nydt.discordmerge.configs.Messages;
 import dk.nydt.discordmerge.events.minecraft.DiscordLink;
 import dk.nydt.discordmerge.handlers.CodeHandler;
 import dk.nydt.discordmerge.handlers.ObjectHandler;

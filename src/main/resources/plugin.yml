@@ -3,8 +3,6 @@ database: true
 version: '${project.version}'
 main: dk.nydt.discordmerge.DiscordMerge
 author: Nydt
-softdepend:
-  - Skript
 commands:
   link:
     description: Link your Minecraft account with your Discord account
@@ -14,3 +12,7 @@ commands:
     description: Claim your Role on Discord if you have linked your account
   boost:
     description: Claim your Boost reward on the server
+  discordmerge:
+    description: Main command for DiscordMerge
+    aliases:
+      - dm

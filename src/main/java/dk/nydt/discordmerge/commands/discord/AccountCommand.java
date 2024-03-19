@@ -2,7 +2,7 @@ package dk.nydt.discordmerge.commands.discord;
 
 import com.j256.ormlite.dao.ForeignCollection;
 import dk.nydt.discordmerge.DiscordMerge;
-import dk.nydt.discordmerge.commands.configs.Messages;
+import dk.nydt.discordmerge.configs.Messages;
 import dk.nydt.discordmerge.handlers.ObjectHandler;
 import dk.nydt.discordmerge.objects.MinecraftAccount;
 import net.dv8tion.jda.api.EmbedBuilder;

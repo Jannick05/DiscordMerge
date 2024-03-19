@@ -1,4 +1,4 @@
-package dk.nydt.discordmerge.commands.configs;
+package dk.nydt.discordmerge.configs;
 
 import eu.okaeri.configs.OkaeriConfig;
 import eu.okaeri.configs.annotation.Comment;

@@ -1,7 +1,7 @@
 package dk.nydt.discordmerge.events.discord;
 
 import dk.nydt.discordmerge.DiscordMerge;
-import dk.nydt.discordmerge.commands.configs.Messages;
+import dk.nydt.discordmerge.configs.Messages;
 import dk.nydt.discordmerge.handlers.ObjectHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;

@@ -1,7 +1,6 @@
 package dk.nydt.discordmerge.events.minecraft;
 
 import lombok.Getter;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
