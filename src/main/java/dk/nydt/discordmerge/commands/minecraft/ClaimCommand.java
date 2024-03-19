@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import dk.nydt.discordmerge.DiscordMerge;
 import dk.nydt.discordmerge.commands.configs.Config;
+import dk.nydt.discordmerge.commands.configs.Messages;
 import dk.nydt.discordmerge.events.minecraft.DiscordClaimRoles;
 import dk.nydt.discordmerge.handlers.SQLiteHandler;
 import dk.nydt.discordmerge.objects.LinkedUser;
@@ -25,25 +26,32 @@ import java.util.Map;
 @CommandAlias("claim")
 public class ClaimCommand extends BaseCommand {
     private final Config configurations = DiscordMerge.getConfiguration();
+    private final Messages messages = DiscordMerge.getMessages();
     @Default
     public void onDefault(CommandSender sender) {
         Player player = (Player) sender;
         try {
             List<MinecraftAccount> minecraftAccount = SQLiteHandler.getMinecraftAccountDao().queryForEq("uuid", player.getUniqueId());
             if(minecraftAccount.isEmpty()) {
-                player.sendMessage("You are not linked to a Discord account!");
+                for(String message : messages.minecraftClaimCommandNotLinked) {
+                    player.sendMessage(message);
+                }
             } else {
                 LinkedUser linkedUser = minecraftAccount.get(0).getLinkedUser();
                 if (linkedUser != null) {
                     Guild guild = DiscordMerge.getJda().getGuildById(configurations.guildId);
                     if(guild == null) {
-                        player.sendMessage("The guild is not in the discord, report to server admin!");
+                        for(String message : messages.minecraftClaimCommandNoGuild) {
+                            player.sendMessage(message);
+                        }
                         return;
                     }
                     CacheRestAction<Member> cache = guild.retrieveMember(User.fromId(linkedUser.getDiscordId()));
                     Member member = cache.complete();
                     if(member == null) {
-                        player.sendMessage("The member is not in the discord, report to server admin!");
+                        for(String message : messages.minecraftClaimCommandNoMember) {
+                            player.sendMessage(message);
+                        }
                         return;
                     }
                     Map<Integer, Map<String, String>> rolePermissions = configurations.rolePermissions;
@@ -51,23 +59,33 @@ public class ClaimCommand extends BaseCommand {
                         if(player.hasPermission(entry.getValue().get("permission"))) {
                             Role role = guild.getRoleById(entry.getValue().get("roleId"));
                             if(role == null) {
-                                player.sendMessage("The role is not in the discord, report to server admin!");
+                                for(String message : messages.minecraftClaimCommandNoRole) {
+                                    player.sendMessage(message);
+                                }
                                 continue;
                             }
                             if(member.getRoles().contains(role)) {
-                                player.sendMessage("You already have the role!");
+                                for(String message : messages.minecraftClaimCommandAlreadyHasRole) {
+                                    player.sendMessage(message);
+                                }
                                 continue;
                             }
                             guild.addRoleToMember(member, role).queue();
-                            player.sendMessage("You have successfully claimed the role!");
+                            for(String message : messages.minecraftClaimCommandSuccess) {
+                                player.sendMessage(message);
+                            }
                             DiscordClaimRoles discordClaimRoles = new DiscordClaimRoles(player);
                             Bukkit.getServer().getPluginManager().callEvent(discordClaimRoles);
                         } else {
-                            player.sendMessage("No available roles to claim!");
+                            for(String message : messages.minecraftClaimCommandNoAvailableRoles) {
+                                player.sendMessage(message);
+                            }
                         }
                     }
                 } else {
-                    player.sendMessage("You are not linked to a Discord account!");
+                    for(String message : messages.minecraftClaimCommandNotLinked) {
+                        player.sendMessage(message);
+                    }
                 }
             }
         } catch (SQLException ex) {

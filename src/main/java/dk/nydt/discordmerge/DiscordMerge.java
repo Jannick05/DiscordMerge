@@ -2,12 +2,10 @@ package dk.nydt.discordmerge;
 
 import co.aikar.commands.PaperCommandManager;
 import dk.nydt.discordmerge.commands.configs.Config;
+import dk.nydt.discordmerge.commands.configs.Messages;
 import dk.nydt.discordmerge.commands.discord.AccountCommand;
 import dk.nydt.discordmerge.commands.discord.CodeCommand;
-import dk.nydt.discordmerge.commands.minecraft.BoostCommand;
-import dk.nydt.discordmerge.commands.minecraft.ClaimCommand;
-import dk.nydt.discordmerge.commands.minecraft.LinkCommand;
-import dk.nydt.discordmerge.commands.minecraft.UnlinkCommand;
+import dk.nydt.discordmerge.commands.minecraft.*;
 import dk.nydt.discordmerge.events.discord.MemberUpdateBoost;
 import dk.nydt.discordmerge.handlers.CodeHandler;
 import dk.nydt.discordmerge.handlers.ConfigHandler;
@@ -49,6 +47,9 @@ public final class DiscordMerge extends JavaPlugin {
     @Getter
     private static Config configuration;
 
+    @Getter
+    private static Messages messages;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -66,11 +67,20 @@ public final class DiscordMerge extends JavaPlugin {
             it.load(true);
         });
 
+        messages = ConfigManager.create(Messages.class, (it) -> {
+            it.withConfigurer(new YamlBukkitConfigurer());
+            it.withBindFile(new File(this.getDataFolder(), "messages.yml"));
+            it.withRemoveOrphans(true);
+            it.saveDefaults();
+            it.load(true);
+        });
+
         commandManager = new PaperCommandManager(this);
         commandManager.registerCommand(new LinkCommand());
         commandManager.registerCommand(new UnlinkCommand());
         commandManager.registerCommand(new ClaimCommand());
         commandManager.registerCommand(new BoostCommand());
+        commandManager.registerCommand(new DiscordMergeCommand());
 
         jda = start();
         registerDiscordCommands();

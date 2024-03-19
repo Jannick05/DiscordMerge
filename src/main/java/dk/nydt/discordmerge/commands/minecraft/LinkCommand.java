@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Syntax;
 import dk.nydt.discordmerge.DiscordMerge;
+import dk.nydt.discordmerge.commands.configs.Messages;
 import dk.nydt.discordmerge.events.minecraft.DiscordLink;
 import dk.nydt.discordmerge.handlers.CodeHandler;
 import dk.nydt.discordmerge.handlers.ObjectHandler;
@@ -21,6 +22,7 @@ import java.util.List;
 public class LinkCommand extends BaseCommand {
     private final CodeHandler codeHandler = DiscordMerge.getCodeHandler();
     private final ObjectHandler objectHandler = DiscordMerge.getObjectHandler();
+    private final Messages messages = DiscordMerge.getMessages();
     @Default
     @Syntax("<code>")
     public void onDefault(CommandSender sender, String code) {
@@ -31,21 +33,30 @@ public class LinkCommand extends BaseCommand {
                 if(codeHandler.getLinkCodes().containsKey(code)) {
                     objectHandler.createMerge(codeHandler.getLinkCodes().get(code), player.getName(), player.getUniqueId());
                     codeHandler.getLinkCodes().remove(code);
-                    player.sendMessage("You have successfully linked your account!");
+                    for(String message : messages.minecraftLinkCommandSuccess) {
+                        player.sendMessage(message);
+                    }
                     DiscordLink discordLink = new DiscordLink(player);
                     Bukkit.getServer().getPluginManager().callEvent(discordLink);
                 } else {
-                    player.sendMessage("Invalid code!");
+                    for(String message : messages.minecraftLinkCommandInvalidCode) {
+                        player.sendMessage(message);
+                    }
                 }
             } else {
                 LinkedUser linkedUser = minecraftAccount.get(0).getLinkedUser();
                 if(linkedUser != null) {
-                    player.sendMessage("You are already linked to the Discord account with id " + linkedUser.getDiscordId() + "!");
+                    for(String message : messages.minecraftLinkCommandAlreadyLinked) {
+                        message = message.replace("%discord%", linkedUser.getDiscordId());
+                        player.sendMessage(message);
+                    }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            player.sendMessage("Try again!");
+            for(String message : messages.minecraftLinkCommandTryAgain) {
+                player.sendMessage(message);
+            }
         }
     }
 }
