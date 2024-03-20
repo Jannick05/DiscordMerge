@@ -3,6 +3,8 @@ database: true
 version: '${project.version}'
 main: dk.nydt.discordmerge.DiscordMerge
 author: Nydt
+softdepend:
+  - Skript
 commands:
   link:
     description: Link your Minecraft account with your Discord account
