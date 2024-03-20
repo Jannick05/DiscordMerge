@@ -78,7 +78,16 @@ public final class DiscordMerge extends JavaPlugin {
         commandManager.registerCommand(new BoostCommand());
         commandManager.registerCommand(new DiscordMergeCommand());
 
-        jda = start();
+        try {
+            jda = start();
+        } finally {
+            if (jda == null) {
+                getLogger().severe("Failed to start JDA, shutting down");
+                getServer().getPluginManager().disablePlugin(this);
+            } else {
+                getLogger().info("JDA started successfully");
+            }
+        }
         registerDiscordCommands();
 
     }

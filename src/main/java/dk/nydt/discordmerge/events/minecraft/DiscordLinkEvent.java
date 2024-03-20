@@ -6,13 +6,13 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class DiscordLink extends Event implements Cancellable {
+public class DiscordLinkEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     @Getter
     private final Player player;
     private Boolean cancelled = Boolean.FALSE;
 
-    public DiscordLink(Player player) {
+    public DiscordLinkEvent(Player player) {
         this.player = player;
     }
 

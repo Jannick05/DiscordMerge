@@ -6,13 +6,13 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class DiscordUnlink extends Event implements Cancellable {
+public class DiscordClaimBoostEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     @Getter
     private final Player player;
     private Boolean cancelled = Boolean.FALSE;
 
-    public DiscordUnlink(Player player) {
+    public DiscordClaimBoostEvent(Player player) {
         this.player = player;
     }
 

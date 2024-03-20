@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.Subcommand;
 import dk.nydt.discordmerge.DiscordMerge;
 import dk.nydt.discordmerge.configs.Config;
 import dk.nydt.discordmerge.configs.Messages;
+import dk.nydt.discordmerge.utils.ColorUtils;
 import org.bukkit.command.CommandSender;
 
 @CommandAlias("discordmerge")
@@ -23,12 +24,12 @@ public class DiscordMergeCommand extends BaseCommand {
             config.load();
             for(String message : messages.minecraftReloadCommandSuccess) {
                 message = message.replace("%time%", String.valueOf(System.currentTimeMillis() - start));
-                sender.sendMessage(message);
+                sender.sendMessage(ColorUtils.getColor(message));
             }
         } catch (Exception e) {
             e.printStackTrace();
             for(String message : messages.minecraftReloadCommandNotReloaded) {
-                sender.sendMessage(message);
+                sender.sendMessage(ColorUtils.getColor(message));
             }
         }
     }

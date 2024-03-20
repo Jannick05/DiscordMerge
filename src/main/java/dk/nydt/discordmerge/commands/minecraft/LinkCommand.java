@@ -6,7 +6,7 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Syntax;
 import dk.nydt.discordmerge.DiscordMerge;
 import dk.nydt.discordmerge.configs.Messages;
-import dk.nydt.discordmerge.events.minecraft.DiscordLink;
+import dk.nydt.discordmerge.events.minecraft.DiscordLinkEvent;
 import dk.nydt.discordmerge.handlers.CodeHandler;
 import dk.nydt.discordmerge.handlers.ObjectHandler;
 import dk.nydt.discordmerge.handlers.SQLiteHandler;
@@ -36,7 +36,7 @@ public class LinkCommand extends BaseCommand {
                     for(String message : messages.minecraftLinkCommandSuccess) {
                         player.sendMessage(message);
                     }
-                    DiscordLink discordLink = new DiscordLink(player);
+                    DiscordLinkEvent discordLink = new DiscordLinkEvent(player);
                     Bukkit.getServer().getPluginManager().callEvent(discordLink);
                 } else {
                     for(String message : messages.minecraftLinkCommandInvalidCode) {

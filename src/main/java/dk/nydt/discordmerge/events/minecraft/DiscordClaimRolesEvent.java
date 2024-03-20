@@ -7,13 +7,13 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class DiscordClaimRoles extends Event implements Cancellable {
+public class DiscordClaimRolesEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     @Getter
     private final Player player;
     private Boolean cancelled = Boolean.FALSE;
 
-    public DiscordClaimRoles(Player player) {
+    public DiscordClaimRolesEvent(Player player) {
         this.player = player;
     }
 

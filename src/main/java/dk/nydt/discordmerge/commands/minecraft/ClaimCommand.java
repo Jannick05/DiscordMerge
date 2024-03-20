@@ -6,10 +6,11 @@ import co.aikar.commands.annotation.Default;
 import dk.nydt.discordmerge.DiscordMerge;
 import dk.nydt.discordmerge.configs.Config;
 import dk.nydt.discordmerge.configs.Messages;
-import dk.nydt.discordmerge.events.minecraft.DiscordClaimRoles;
+import dk.nydt.discordmerge.events.minecraft.DiscordClaimRolesEvent;
 import dk.nydt.discordmerge.handlers.SQLiteHandler;
 import dk.nydt.discordmerge.objects.LinkedUser;
 import dk.nydt.discordmerge.objects.MinecraftAccount;
+import dk.nydt.discordmerge.utils.ColorUtils;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
@@ -34,7 +35,7 @@ public class ClaimCommand extends BaseCommand {
             List<MinecraftAccount> minecraftAccount = SQLiteHandler.getMinecraftAccountDao().queryForEq("uuid", player.getUniqueId());
             if(minecraftAccount.isEmpty()) {
                 for(String message : messages.minecraftClaimCommandNotLinked) {
-                    player.sendMessage(message);
+                    player.sendMessage(ColorUtils.getColor(message));
                 }
             } else {
                 LinkedUser linkedUser = minecraftAccount.get(0).getLinkedUser();
@@ -42,7 +43,7 @@ public class ClaimCommand extends BaseCommand {
                     Guild guild = DiscordMerge.getJda().getGuildById(configurations.guildId);
                     if(guild == null) {
                         for(String message : messages.minecraftClaimCommandNoGuild) {
-                            player.sendMessage(message);
+                            player.sendMessage(ColorUtils.getColor(message));
                         }
                         return;
                     }
@@ -50,7 +51,7 @@ public class ClaimCommand extends BaseCommand {
                     Member member = cache.complete();
                     if(member == null) {
                         for(String message : messages.minecraftClaimCommandNoMember) {
-                            player.sendMessage(message);
+                            player.sendMessage(ColorUtils.getColor(message));
                         }
                         return;
                     }
@@ -60,31 +61,31 @@ public class ClaimCommand extends BaseCommand {
                             Role role = guild.getRoleById(entry.getValue().get("roleId"));
                             if(role == null) {
                                 for(String message : messages.minecraftClaimCommandNoRole) {
-                                    player.sendMessage(message);
+                                    player.sendMessage(ColorUtils.getColor(message));
                                 }
                                 continue;
                             }
                             if(member.getRoles().contains(role)) {
                                 for(String message : messages.minecraftClaimCommandAlreadyHasRole) {
-                                    player.sendMessage(message);
+                                    player.sendMessage(ColorUtils.getColor(message));
                                 }
                                 continue;
                             }
                             guild.addRoleToMember(member, role).queue();
                             for(String message : messages.minecraftClaimCommandSuccess) {
-                                player.sendMessage(message);
+                                player.sendMessage(ColorUtils.getColor(message));
                             }
-                            DiscordClaimRoles discordClaimRoles = new DiscordClaimRoles(player);
+                            DiscordClaimRolesEvent discordClaimRoles = new DiscordClaimRolesEvent(player);
                             Bukkit.getServer().getPluginManager().callEvent(discordClaimRoles);
                         } else {
                             for(String message : messages.minecraftClaimCommandNoAvailableRoles) {
-                                player.sendMessage(message);
+                                player.sendMessage(ColorUtils.getColor(message));
                             }
                         }
                     }
                 } else {
                     for(String message : messages.minecraftClaimCommandNotLinked) {
-                        player.sendMessage(message);
+                        player.sendMessage(ColorUtils.getColor(message));
                     }
                 }
             }
