@@ -67,13 +67,13 @@ public class ClaimCommand extends BaseCommand {
                             }
                             if(member.getRoles().contains(role)) {
                                 for(String message : messages.minecraftClaimCommandAlreadyHasRole) {
-                                    player.sendMessage(ColorUtils.getColor(message));
+                                    player.sendMessage(ColorUtils.getColor(message.replace("%role%", role.getName())));
                                 }
                                 continue;
                             }
                             guild.addRoleToMember(member, role).queue();
                             for(String message : messages.minecraftClaimCommandSuccess) {
-                                player.sendMessage(ColorUtils.getColor(message));
+                                player.sendMessage(ColorUtils.getColor(message.replace("%role%", role.getName())));
                             }
                             DiscordClaimRolesEvent discordClaimRoles = new DiscordClaimRolesEvent(player);
                             Bukkit.getServer().getPluginManager().callEvent(discordClaimRoles);

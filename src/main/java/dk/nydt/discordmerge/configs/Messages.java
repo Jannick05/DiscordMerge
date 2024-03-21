@@ -30,9 +30,9 @@ public class Messages extends OkaeriConfig {
     public List<String> minecraftClaimCommandNoGuild = Collections.singletonList("You are not in the correct guild!");
     public List<String> minecraftClaimCommandNoMember = Collections.singletonList("You are not in the guild!");
     public List<String> minecraftClaimCommandNoRole = Collections.singletonList("You do not have the required role to claim a reward!");
-    public List<String> minecraftClaimCommandAlreadyHasRole = Collections.singletonList("You already have the role!");
+    public List<String> minecraftClaimCommandAlreadyHasRole = Collections.singletonList("You already have the role! %role%");
     public List<String> minecraftClaimCommandNoAvailableRoles = Collections.singletonList("There are no available roles to claim!");
-    public List<String> minecraftClaimCommandSuccess = Collections.singletonList("You have successfully claimed your reward!");
+    public List<String> minecraftClaimCommandSuccess = Collections.singletonList("You have successfully claimed your role! %role%");
     @Comment(" ")
     public List<String> minecraftLinkCommandSuccess = Collections.singletonList("You have successfully linked your account!");
     public List<String> minecraftLinkCommandInvalidCode = Collections.singletonList("Invalid code!");
