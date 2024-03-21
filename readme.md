@@ -14,6 +14,8 @@ DiscordMerge is a Minecraft plugin designed to enhance your gaming experience by
 1. Download the latest version of DiscordMerge from the [releases](https://github.com/Jannick05/DiscordMerge/releases) section of this GitHub repository.
 2. Place the plugin file (`DiscordMerge.jar`) into the `plugins` folder of your Minecraft server.
 3. Restart the server to load the plugin.
+4. Input your Discord Bots Token and Guild ID into `config.yml`.
+5. Restart the server for the last time.
 
 ## Usage
 1. **Getting Code:** On the Discord server for your server you should use the command (`/code`)
