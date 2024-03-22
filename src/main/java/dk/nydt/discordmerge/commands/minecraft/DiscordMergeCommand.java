@@ -10,7 +10,7 @@ import dk.nydt.discordmerge.configs.Messages;
 import dk.nydt.discordmerge.utils.ColorUtils;
 import org.bukkit.command.CommandSender;
 
-@CommandAlias("discordmerge")
+@CommandAlias("discordmerge|dm")
 @CommandPermission("discordmerge.admin")
 public class DiscordMergeCommand extends BaseCommand {
     private final Messages messages = DiscordMerge.getMessages();

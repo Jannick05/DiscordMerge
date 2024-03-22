@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-@CommandAlias("unlink")
+@CommandAlias("unlink|unverify")
 public class UnlinkCommand extends BaseCommand {
     private final Messages messages = DiscordMerge.getMessages();
     @Default

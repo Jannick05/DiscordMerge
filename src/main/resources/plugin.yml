@@ -7,14 +7,16 @@ softdepend:
   - Skript
 commands:
   link:
+    aliases: [verify]
     description: Link your Minecraft account with your Discord account
   unlink:
+    aliases: [unverify]
     description: Unlink your Minecraft account from your Discord account
   claim:
+    aliases: [rank, roles]
     description: Claim your Role on Discord if you have linked your account
   boost:
     description: Claim your Boost reward on the server
   discordmerge:
+    aliases: [dm]
     description: Main command for DiscordMerge
-    aliases:
-      - dm

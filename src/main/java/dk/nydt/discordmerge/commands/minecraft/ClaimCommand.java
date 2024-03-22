@@ -24,7 +24,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-@CommandAlias("claim")
+@CommandAlias("claim|rank|roles")
 public class ClaimCommand extends BaseCommand {
     private final Config configurations = DiscordMerge.getConfiguration();
     private final Messages messages = DiscordMerge.getMessages();

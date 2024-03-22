@@ -18,7 +18,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-@CommandAlias("link")
+@CommandAlias("link|verify")
 public class LinkCommand extends BaseCommand {
     private final CodeHandler codeHandler = DiscordMerge.getCodeHandler();
     private final ObjectHandler objectHandler = DiscordMerge.getObjectHandler();
