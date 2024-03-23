@@ -28,7 +28,3 @@ For support, bug reports, or feature requests, please open an issue on this repo
 
 ## Contributing
 We appreciate contributions from the community! If you're interested in contributing to DiscordMerge, please follow contact me on discord: `jannick_05`.
-
----
-
-**Note:** DiscordMerge is not affiliated with or endorsed by Discord or Mojang. Minecraft is a trademark of Mojang Synergies AB. Discord is a trademark of Discord, Inc.
