@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Config extends OkaeriConfig {
-    @Comment("The bot token for the Discord bot, and the guild ID for the server the bot should be in.")
+    @Comment("The bot token for the Discord bot, and the guild ID for the server the bot is in.")
     public String botToken = "TOKEN_HERE";
     public String guildId = "GUILD_ID_HERE";
 
