@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Syntax;
 import dk.nydt.discordmerge.DiscordMerge;
+import dk.nydt.discordmerge.configs.Config;
 import dk.nydt.discordmerge.configs.Messages;
 import dk.nydt.discordmerge.events.minecraft.DiscordLinkEvent;
 import dk.nydt.discordmerge.handlers.CodeHandler;
@@ -23,6 +24,7 @@ public class LinkCommand extends BaseCommand {
     private final CodeHandler codeHandler = DiscordMerge.getCodeHandler();
     private final ObjectHandler objectHandler = DiscordMerge.getObjectHandler();
     private final Messages messages = DiscordMerge.getMessages();
+    private final Config config = DiscordMerge.getConfiguration();
     @Default
     @Syntax("<code>")
     public void onDefault(CommandSender sender, String code) {
@@ -35,6 +37,9 @@ public class LinkCommand extends BaseCommand {
                     codeHandler.getLinkCodes().remove(code);
                     for(String message : messages.minecraftLinkCommandSuccess) {
                         player.sendMessage(message);
+                    }
+                    if(config.autoRoles) {
+                        player.performCommand("claim");
                     }
                     DiscordLinkEvent discordLink = new DiscordLinkEvent(player);
                     Bukkit.getServer().getPluginManager().callEvent(discordLink);

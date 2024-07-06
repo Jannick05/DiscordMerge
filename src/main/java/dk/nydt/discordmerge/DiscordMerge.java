@@ -80,7 +80,7 @@ public final class DiscordMerge extends JavaPlugin {
         commandManager.registerCommand(new BoostCommand());
         commandManager.registerCommand(new DiscordMergeCommand());
 
-        try {
+        if(getServer().getPluginManager().getPlugin("Skript") != null) try {
             Skript.registerAddon(this).loadClasses("dk.nydt.discordmerge", "skript");
         } catch (IOException e) {
             throw new RuntimeException("Failed to load the addon.", e);
