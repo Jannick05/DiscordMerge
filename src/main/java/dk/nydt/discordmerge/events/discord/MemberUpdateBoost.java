@@ -3,6 +3,7 @@ package dk.nydt.discordmerge.events.discord;
 import dk.nydt.discordmerge.DiscordMerge;
 import dk.nydt.discordmerge.configs.Messages;
 import dk.nydt.discordmerge.handlers.ObjectHandler;
+import dk.nydt.discordmerge.objects.LinkedUser;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.guild.member.update.GuildMemberUpdateBoostTimeEvent;
@@ -16,18 +17,21 @@ public class MemberUpdateBoost extends ListenerAdapter {
     public void onGuildMemberUpdateBoostTime(GuildMemberUpdateBoostTimeEvent event) {
         Member member = event.getMember();
         if(Integer.parseInt(String.valueOf(event.getOldValue())) > Integer.parseInt(String.valueOf(event.getNewValue()))) {
-            return;
-        }
-        member.getUser().openPrivateChannel().queue(privateChannel -> {
             try {
-                EmbedBuilder embedBuilder = new EmbedBuilder();
-                embedBuilder.setTitle(messages.discordBoostEventTitle);
-                embedBuilder.setColor(messages.discordBoostEventEmbedColor);
-                embedBuilder.setDescription(messages.discordBoostEventDescription.replace("%code%", objectHandler.createBoostCode()));
-                privateChannel.sendMessageEmbeds(embedBuilder.build()).queue();
+                LinkedUser linkedUser = objectHandler.getLinkedUser(member.getId());
+                linkedUser.setBooster(false);
+                linkedUser.update();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
-        });
+        } else {
+            try {
+                LinkedUser linkedUser = objectHandler.getLinkedUser(member.getId());
+                linkedUser.setBooster(true);
+                linkedUser.update();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

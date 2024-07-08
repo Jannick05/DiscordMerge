@@ -77,7 +77,6 @@ public final class DiscordMerge extends JavaPlugin {
         commandManager.registerCommand(new LinkCommand());
         commandManager.registerCommand(new UnlinkCommand());
         commandManager.registerCommand(new ClaimCommand());
-        commandManager.registerCommand(new BoostCommand());
         commandManager.registerCommand(new DiscordMergeCommand());
 
         if(getServer().getPluginManager().getPlugin("Skript") != null) try {
@@ -134,6 +133,7 @@ public final class DiscordMerge extends JavaPlugin {
     private static void registerDiscordCommands() {
         Guild guild = jda.getGuildById(configuration.guildId);
         if(guild == null) return;
+        jda.addEventListener(new MemberUpdateBoost());
         guild.updateCommands().addCommands(
                 Commands.slash("code", "Generates a code for linking your account"),
                 Commands.slash("account", "Shows linked accounts")

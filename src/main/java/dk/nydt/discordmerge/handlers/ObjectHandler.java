@@ -2,11 +2,16 @@ package dk.nydt.discordmerge.handlers;
 
 import com.j256.ormlite.dao.ForeignCollection;
 import dk.nydt.discordmerge.DiscordMerge;
-import dk.nydt.discordmerge.objects.BoostCode;
 import dk.nydt.discordmerge.objects.LinkedUser;
 import dk.nydt.discordmerge.objects.MinecraftAccount;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.UserSnowflake;
+import net.dv8tion.jda.api.requests.restaction.CacheRestAction;
 
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.UUID;
 
 public class ObjectHandler {
@@ -31,6 +36,10 @@ public class ObjectHandler {
         }
     }
 
+    public LinkedUser getLinkedUser(String discordId) throws SQLException {
+        return SQLiteHandler.getLinkedUserDao().queryForEq("discordId", discordId).get(0);
+    }
+
     public MinecraftAccount getOrCreateMinecraftAccount(UUID uuid, String name, LinkedUser linkedUser) throws SQLException {
         try {
             return SQLiteHandler.getMinecraftAccountDao().queryForEq("uuid", uuid).get(0);
@@ -43,13 +52,12 @@ public class ObjectHandler {
         return getOrCreateLinkedUser(discordId).getMinecraftAccounts();
     }
 
-    public String createBoostCode() throws SQLException {
-        String code = codeHandler.generateCode();
-        if(!SQLiteHandler.getBoostCodeDao().queryForEq("code", code).isEmpty()) {
-            return createBoostCode();
-        }
-        SQLiteHandler.getBoostCodeDao().create(new BoostCode(code));
-        return SQLiteHandler.getBoostCodeDao().queryForEq("code", code).get(0).getCode();
+    public Member getCachedUser(String id) {
+        Guild guild = DiscordMerge.getJda().getGuildById(1168623927170437312L);
+        UserSnowflake user = User.fromId(id);
+        Long userId = user.getIdLong();
+        CacheRestAction<Member> cache = Objects.requireNonNull(guild).retrieveMemberById(userId);
+        return cache.complete();
     }
 
 }

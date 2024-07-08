@@ -6,7 +6,6 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import dk.nydt.discordmerge.DiscordMerge;
-import dk.nydt.discordmerge.objects.BoostCode;
 import dk.nydt.discordmerge.objects.LinkedUser;
 import dk.nydt.discordmerge.objects.MinecraftAccount;
 import lombok.Getter;
@@ -20,8 +19,6 @@ public class SQLiteHandler {
     private static Dao<LinkedUser, Integer> linkedUserDao;
     @Getter
     private static Dao<MinecraftAccount, Integer> minecraftAccountDao;
-    @Getter
-    private static Dao<BoostCode, Integer> boostCodeDao;
 
     public SQLiteHandler() {
         try {
@@ -38,8 +35,5 @@ public class SQLiteHandler {
 
         TableUtils.createTableIfNotExists(connectionSource, MinecraftAccount.class);
         minecraftAccountDao = DaoManager.createDao(connectionSource, MinecraftAccount.class);
-
-        TableUtils.createTableIfNotExists(connectionSource, BoostCode.class);
-        boostCodeDao = DaoManager.createDao(connectionSource, BoostCode.class);
     }
 }

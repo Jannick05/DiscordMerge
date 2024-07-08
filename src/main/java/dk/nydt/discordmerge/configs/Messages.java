@@ -16,15 +16,8 @@ public class Messages extends OkaeriConfig {
     public String discordCodeCommandDescription = "Here's your code: %code%";
     public int discordCodeCommandEmbedColor = 0x00ff00;
     @Comment(" ")
-    public String discordBoostEventTitle = "Boost";
-    public String discordBoostEventDescription = "Here's your code: %code%";
-    public int discordBoostEventEmbedColor = 0x00ff00;
-    @Comment(" ")
     public List<String> minecraftReloadCommandSuccess = Collections.singletonList("You have successfully reloaded the plugin! Took %time%ms");
     public List<String> minecraftReloadCommandNotReloaded = Collections.singletonList("The plugin wasn't reloaded properly.");
-    @Comment(" ")
-    public List<String> minecraftBoostCommandInvalidCode = Collections.singletonList("Invalid code!");
-    public List<String> minecraftBoostCommandSuccess = Collections.singletonList("You have successfully claimed your boost reward!");
     @Comment(" ")
     public List<String> minecraftClaimCommandNotLinked = Collections.singletonList("You are not linked to a Discord account!");
     public List<String> minecraftClaimCommandNoGuild = Collections.singletonList("You are not in the correct guild!");
