@@ -19,9 +19,6 @@ public class LinkedUser extends BaseDaoEnabled<LinkedUser, Integer> {
     @DatabaseField(columnName = "discordId")
     private String discordId;
     @Setter @Getter
-    @DatabaseField(columnName = "booster")
-    private boolean booster;
-    @Setter @Getter
     @ForeignCollectionField(columnName = "minecraftAccounts", eager = true)
     private ForeignCollection<MinecraftAccount> minecraftAccounts;
 
@@ -30,10 +27,6 @@ public class LinkedUser extends BaseDaoEnabled<LinkedUser, Integer> {
 
     public LinkedUser(String discordId) {
         this.discordId = discordId;
-    }
-
-    public void setBooster(boolean booster) {
-        this.booster = booster;
     }
 
     public void addMinecraftAccount(MinecraftAccount minecraftAccount) throws SQLException {

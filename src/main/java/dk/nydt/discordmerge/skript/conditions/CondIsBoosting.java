@@ -7,12 +7,9 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import dk.nydt.discordmerge.DiscordMerge;
 import dk.nydt.discordmerge.configs.Config;
-import dk.nydt.discordmerge.configs.Messages;
-import dk.nydt.discordmerge.handlers.ObjectHandler;
 import dk.nydt.discordmerge.handlers.SQLiteHandler;
 import dk.nydt.discordmerge.objects.LinkedUser;
 import dk.nydt.discordmerge.objects.MinecraftAccount;
-import dk.nydt.discordmerge.utils.ColorUtils;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import org.bukkit.entity.Player;
@@ -27,7 +24,6 @@ public class CondIsBoosting extends Condition {
     private final Config config = DiscordMerge.getConfiguration();
 
     private Expression<Player> player;
-    private Expression<String> id;
 
     static {
         Skript.registerCondition(CondIsBoosting.class, "[discordmerge ][if ]%player% is boosting");

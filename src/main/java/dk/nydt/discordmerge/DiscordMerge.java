@@ -7,7 +7,6 @@ import dk.nydt.discordmerge.configs.Messages;
 import dk.nydt.discordmerge.commands.discord.AccountCommand;
 import dk.nydt.discordmerge.commands.discord.CodeCommand;
 import dk.nydt.discordmerge.commands.minecraft.*;
-import dk.nydt.discordmerge.events.discord.MemberUpdateBoost;
 import dk.nydt.discordmerge.handlers.CodeHandler;
 import dk.nydt.discordmerge.handlers.ObjectHandler;
 import dk.nydt.discordmerge.handlers.SQLiteHandler;
@@ -53,10 +52,6 @@ public final class DiscordMerge extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        codeHandler = new CodeHandler();
-        objectHandler = new ObjectHandler();
-        sqliteHandler = new SQLiteHandler();
-
         configuration = ConfigManager.create(Config.class, (it) -> {
             it.withConfigurer(new YamlBukkitConfigurer());
             it.withBindFile(new File(this.getDataFolder(), "config.yml"));
@@ -72,6 +67,10 @@ public final class DiscordMerge extends JavaPlugin {
             it.saveDefaults();
             it.load(true);
         });
+
+        codeHandler = new CodeHandler();
+        objectHandler = new ObjectHandler();
+        sqliteHandler = new SQLiteHandler();
 
         commandManager = new PaperCommandManager(this);
         commandManager.registerCommand(new LinkCommand());
@@ -119,8 +118,7 @@ public final class DiscordMerge extends JavaPlugin {
                 .setAutoReconnect(true)
                 .addEventListeners(
                         new CodeCommand(),
-                        new AccountCommand(),
-                        new MemberUpdateBoost())
+                        new AccountCommand())
                 .build();
         try {
             jda.awaitReady();
@@ -133,7 +131,6 @@ public final class DiscordMerge extends JavaPlugin {
     private static void registerDiscordCommands() {
         Guild guild = jda.getGuildById(configuration.guildId);
         if(guild == null) return;
-        jda.addEventListener(new MemberUpdateBoost());
         guild.updateCommands().addCommands(
                 Commands.slash("code", "Generates a code for linking your account"),
                 Commands.slash("account", "Shows linked accounts")
